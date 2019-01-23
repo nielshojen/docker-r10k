@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:bionic
 
 ARG vcs_ref
 ARG build_date
