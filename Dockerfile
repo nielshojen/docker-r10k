@@ -22,7 +22,7 @@ RUN apt-get update && \
     apt-get install --no-install-recommends -y wget ca-certificates lsb-release && \
     wget https://apt.puppetlabs.com/puppet6-release-"$UBUNTU_CODENAME".deb && \
     dpkg -i puppet6-release-"$UBUNTU_CODENAME".deb && \
-    rm puppet5-release-"$UBUNTU_CODENAME".deb && \
+    rm puppet6-release-"$UBUNTU_CODENAME".deb && \
     apt-get update && \
     apt-get install --no-install-recommends -y puppet-agent && \
     apt-get install --no-install-recommends -y git openssh-client && \
