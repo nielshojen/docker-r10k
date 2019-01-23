@@ -18,6 +18,8 @@ LABEL org.label-schema.maintainer="Niels Højen <niels@hojen.net>" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.dockerfile="/Dockerfile"
 
+ADD run.sh /
+
 RUN apt-get update && \
     apt-get install --no-install-recommends -y wget curl ca-certificates lsb-release && \
     curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
@@ -35,13 +37,15 @@ RUN apt-get update && \
     git lfs install && \
     mkdir /root/.ssh && \
     chmod 0600 /root/.ssh && \
-    echo StrictHostKeyChecking no > /root/.ssh/config
+    echo StrictHostKeyChecking no > /root/.ssh/config && \
+    chmod +x /run.sh
 
 RUN /opt/puppetlabs/puppet/bin/gem install r10k:"$R10K_VERSION"
 
 ENV PATH=/opt/puppetlabs/server/bin:/opt/puppetlabs/puppet/bin:/opt/puppetlabs/bin:$PATH
 
-ENTRYPOINT ["/opt/puppetlabs/puppet/bin/r10k"]
-CMD ["help"]
+VOLUME ["/etc/puppetlabs/code/environments", "/var/cache/r10k"]
+
+ENTRYPOINT ["/run.sh"]
 
 COPY Dockerfile /
