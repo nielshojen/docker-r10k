@@ -30,6 +30,8 @@ RUN apt-get update && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
+    mkdir /root/.ssh && \
+    chmod 0600 /root/.ssh && \
     echo StrictHostKeyChecking no > /root/.ssh/config
 
 RUN /opt/puppetlabs/puppet/bin/gem install r10k:"$R10K_VERSION"
