@@ -20,7 +20,7 @@ LABEL org.label-schema.maintainer="Niels Højen <niels@hojen.net>" \
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y wget curl ca-certificates lsb-release && \
-    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash && \
+    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
     wget https://apt.puppetlabs.com/puppet6-release-"$UBUNTU_CODENAME".deb && \
     dpkg -i puppet6-release-"$UBUNTU_CODENAME".deb && \
     rm puppet6-release-"$UBUNTU_CODENAME".deb && \
