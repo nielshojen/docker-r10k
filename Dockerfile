@@ -19,7 +19,7 @@ LABEL org.label-schema.maintainer="Niels Højen <niels@hojen.net>" \
       org.label-schema.dockerfile="/Dockerfile"
 
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y wget ca-certificates lsb-release && \
+    apt-get install --no-install-recommends -y wget curl ca-certificates lsb-release && \
     curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash && \
     wget https://apt.puppetlabs.com/puppet6-release-"$UBUNTU_CODENAME".deb && \
     dpkg -i puppet6-release-"$UBUNTU_CODENAME".deb && \
@@ -27,7 +27,7 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install --no-install-recommends -y puppet-agent && \
     apt-get install --no-install-recommends -y git git-lfs openssh-client && \
-    apt-get remove --purge -y wget && \
+    apt-get remove --purge -y wget curl && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
