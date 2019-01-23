@@ -32,6 +32,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm /etc/apt/sources.list.d/github_git-lfs.list && \
+    git lfs install && \
     mkdir /root/.ssh && \
     chmod 0600 /root/.ssh && \
     echo StrictHostKeyChecking no > /root/.ssh/config
