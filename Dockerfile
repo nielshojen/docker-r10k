@@ -6,7 +6,7 @@ ARG version="3.1.0"
 ENV R10K_VERSION="$version"
 ENV UBUNTU_CODENAME="bionic"
 
-LABEL org.label-schema.maintainer="Puppet Release Team <release@puppet.com>" \
+LABEL org.label-schema.maintainer="Niels Højen <niels@hojen.net>" \
       org.label-schema.vendor="Puppet" \
       org.label-schema.url="https://github.com/puppetlabs/r10k" \
       org.label-schema.name="r10k" \
@@ -29,14 +29,14 @@ RUN apt-get update && \
     apt-get remove --purge -y wget && \
     apt-get autoremove -y && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    echo StrictHostKeyChecking no > /root/.ssh/config
 
 RUN /opt/puppetlabs/puppet/bin/gem install r10k:"$R10K_VERSION"
 
 ENV PATH=/opt/puppetlabs/server/bin:/opt/puppetlabs/puppet/bin:/opt/puppetlabs/bin:$PATH
 
-#ENTRYPOINT ["/opt/puppetlabs/puppet/bin/r10k"]
-#CMD ["help"]
-CMD ["sleep infinity"]
+ENTRYPOINT ["/opt/puppetlabs/puppet/bin/r10k"]
+CMD ["help"]
 
 COPY Dockerfile /
