@@ -2,7 +2,7 @@ FROM ubuntu:bionic
 
 ARG vcs_ref
 ARG build_date
-ARG version="3.1.0"
+ARG version="3.3.3"
 ENV R10K_VERSION="$version"
 ENV UBUNTU_CODENAME="bionic"
 
